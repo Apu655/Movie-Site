@@ -1,16 +1,17 @@
-import React from 'react'
-import Navbar from './Navbar/Navbar'
-import Header from './Header/Header'
+import React from "react";
+import Navbar from "./Navbar/Navbar";
+import Header from "./Header/Header";
 
-type Props = {}
+type Props = {};
 
-const Layout = (props: Props) => {
+const Layout = ({children}:{children:React.ReactNode}) => {
   return (
     <>
-    <Navbar/>
-    <Header/>
+      <Navbar />
+      <Header />
+      {children}
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
