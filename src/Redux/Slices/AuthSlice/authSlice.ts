@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import authService from "./authService";
-import {IUser} from "./interfaces"
+import { IUser } from "./interfaces";
 
 const initialState: IUser = {
   user: null,
@@ -13,7 +13,7 @@ const initialState: IUser = {
 
 export const login = createAsyncThunk(
   "auth/login",
-  async (user:{email:string,password:string}, { rejectWithValue }) => {
+  async (user: { email: string; password: string }, { rejectWithValue }) => {
     try {
       return await authService.login(user);
     } catch (error: any) {
@@ -57,5 +57,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const {reset} = authSlice.actions;
-export default authSlice.reducer
+export const { reset } = authSlice.actions;
+export default authSlice.reducer;
