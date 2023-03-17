@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const login = async(userData:typeof)=>{
+const login = async(userData:{email:string,password:string})=>{
     const response = await axios.post("/user/login",userData)
 
     if (response && response.data){
