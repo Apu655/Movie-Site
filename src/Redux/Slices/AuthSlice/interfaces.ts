@@ -2,7 +2,7 @@ export interface IUser {
   user: {
     name: string;
     email: string;
-    type: string;
+    type?: string;
   } | null;
   isError: boolean;
   isSuccess: boolean;
