@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axios } from "@/config";
 
 const login = async (userData: { email: string; password: string }) => {
   const response = await axios.post("/user/login", userData);
@@ -9,10 +9,10 @@ const login = async (userData: { email: string; password: string }) => {
   return response.data.token;
 };
 
-const register = async (userData:any)=>{
-    const response = await axios.post("/user/register")
-    return response
-}
+const register = async (userData: any) => {
+  const response = await axios.post("/user/register");
+  return response;
+};
 
 const authService = {
   login,
