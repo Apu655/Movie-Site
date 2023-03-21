@@ -1,1 +1,14 @@
+Setup Config in linux
+Step-1: sudo chmod 755 xampp-linux-x64-8.2.0-0-installer.run
+Step-2: sudo ./xampp-linux-x64-8.2.0-0-installer.run
+
+Run Xampp
+rakib@rakib-pc:/opt/lampp$ sudo /opt/lampp/lampp start
+rakib@rakib-pc:/opt/lampp$ sudo /opt/lampp/lampp stop
+
+
+
+
+
+
 
