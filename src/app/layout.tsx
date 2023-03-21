@@ -17,6 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>JAMBO</title>
+      </head>
       <body>
         <Provider store={store}>
           <Layout>{children}</Layout>
