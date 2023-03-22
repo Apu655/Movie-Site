@@ -1,6 +1,11 @@
-const API_KEY: any = process.env.API_KEY;
+// const API_KEY: any = process.env.API_KEY;
+const API_KEY = '8b6df62253b4f02d186eaf35b0f43ea2'
 
 const request: any = {
+  fetchPage1:{
+    title:"page-1",
+    url: `/search/company?api_key=${API_KEY}&page=1`
+  },
   fetchTrending: {
     title: "Trending",
     url: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
