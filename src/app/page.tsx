@@ -17,7 +17,6 @@ export default function Home({results}:any) {
   const {isLoading,isSuccess,isError,movieList} = useAppSelector(state=>state.movie)
   console.log(movieList)
 
-  const [movieData,setMovieData] = useState<any>([])
   const API_KEY = '8b6df62253b4f02d186eaf35b0f43ea2'
   return (
     <main >
