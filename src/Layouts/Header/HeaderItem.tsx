@@ -1,4 +1,4 @@
-import { getMovieBySearch } from "@/Redux/Slices/MovieSlice/MovieSlice";
+import { getMovie, getMovieBySearch } from "@/Redux/Slices/MovieSlice/MovieSlice";
 import { useAppDispatch } from "@/Redux/hooks";
 import { useState, useContext } from "react";
 
@@ -11,13 +11,18 @@ const HeaderItem = ({ Icon, title }: HeaderProps) => {
   const [openSearch, setOpenSearch] = useState(false);
   const dispatch = useAppDispatch()
 
-  const [query, setQuery] = useState("");
   const handleSearch = () => {
     setOpenSearch(!openSearch);
   };
   const handleChange = (e:any) => {
-    setQuery(e.target.value);
-    dispatch(getMovieBySearch(e.target.value))
+    const {value} = e.target
+    if (value){
+      dispatch(getMovieBySearch(e.target.value))
+    }
+    else{
+      dispatch(getMovie())
+    }
+    
   };
 
   if (title == "SEARCH") {
@@ -35,7 +40,6 @@ const HeaderItem = ({ Icon, title }: HeaderProps) => {
           {openSearch && (
             <input
               onChange={handleChange}
-              value={query}
               className="font-semibold px-4 w-40 rounded-lg text-black"
             />
           )}
