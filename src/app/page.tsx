@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAppDispatch,useAppSelector } from "@/Redux/hooks";
 import { getMovie } from "@/Redux/Slices/MovieSlice/MovieSlice";
+import Loading from '@/components/Loading';
 
 
 export default function Home({results}:any) {
@@ -18,8 +19,14 @@ export default function Home({results}:any) {
   console.log(movieList)
 
   const API_KEY = '8b6df62253b4f02d186eaf35b0f43ea2'
+  if(isLoading){
+    return (
+      <Loading/>
+    )
+  }
   return (
     <main >
+      {/* {isLoading && <Loading/>} */}
       {movieList.length>0 ?(<Results results={movieList}></Results>):(<div></div>)}      
     </main>
   )
