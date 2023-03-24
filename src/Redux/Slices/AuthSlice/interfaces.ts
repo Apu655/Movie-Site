@@ -3,7 +3,7 @@ export interface IUser {
     name: string;
     email: string;
     type?: string;
-  } | null;
+  } | null|any;
   isError: boolean;
   isSuccess: boolean;
   isLoading: boolean;
