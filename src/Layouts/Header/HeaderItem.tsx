@@ -1,3 +1,5 @@
+import { getMovieBySearch } from "@/Redux/Slices/MovieSlice/MovieSlice";
+import { useAppDispatch } from "@/Redux/hooks";
 import { useState, useContext } from "react";
 
 interface HeaderProps {
@@ -7,6 +9,7 @@ interface HeaderProps {
 
 const HeaderItem = ({ Icon, title }: HeaderProps) => {
   const [openSearch, setOpenSearch] = useState(false);
+  const dispatch = useAppDispatch()
 
   const [query, setQuery] = useState("");
   const handleSearch = () => {
@@ -14,6 +17,7 @@ const HeaderItem = ({ Icon, title }: HeaderProps) => {
   };
   const handleChange = (e:any) => {
     setQuery(e.target.value);
+    dispatch(getMovieBySearch(e.target.value))
   };
 
   if (title == "SEARCH") {
