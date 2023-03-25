@@ -6,13 +6,15 @@ import Link from "next/link";
 function Thumbnail({ result }: any) {
   const BASE_URL: string = "https://image.tmdb.org./t/p/original/";
   // const route = useRouter()
+
   return (
-    <Link href={`movies/${result.id}`} legacyBehavior>
+    <Link href={`movie/${result.id}`} legacyBehavior>
       <a className=" group transition-all hover:scale-[1.05] hover:shadow-md mx-12 my-14 cursor-pointer hover:text-white transform hover:z-30 ease-in duration-200">
         <img
+          alt="Movie Poster"
           className="my-6"
           src={
-            result.backdrop_path||result.poster_path
+            result.backdrop_path || result.poster_path
               ? `${BASE_URL}${
                   result.poster_path || result.path || result.backdrop_path
                 }`
