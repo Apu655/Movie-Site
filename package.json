@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "server": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@heroicons/react": "^1.0.5",
@@ -15,11 +16,16 @@
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "axios": "^1.3.4",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
+    "express": "^4.18.2",
     "flowbite": "^1.6.4",
     "flowbite-react": "^0.4.2",
+    "mysql2": "^3.2.0",
     "next": "13.2.4",
+    "nodemon": "^2.0.22",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
@@ -31,5 +37,17 @@
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "next.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Apu655/Movie-Site.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Apu655/Movie-Site/issues"
+  },
+  "homepage": "https://github.com/Apu655/Movie-Site#readme"
 }
