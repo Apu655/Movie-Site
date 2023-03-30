@@ -1,3 +1,4 @@
+-- Creating Table
 CREATE TABLE movies (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
@@ -7,3 +8,8 @@ CREATE TABLE movies (
   poster VARCHAR(255) NOT NULL,
   PRIMARY KEY (id)
 );
+
+-- Inserting Datas
+INSERT INTO movies (name, language, genre, rating, poster) 
+VALUES ('Pathaan', 'Hindi', 'Action', 6.1, 'I:\\University Files\\9th Semester\\CSE471\\Movie-Site\\backend\\mysql commands\\Posters\\Pathaan.jpg');
+
