@@ -3,7 +3,7 @@ import Link from "next/link"
 
 const Results= ({results}:any)=>{
   console.log("results",results)
-  results.map((result,index)=>{
+  results.map((result:any,index:number)=>{
     console.log("Result number",index,result)
     // result.map((res,index)=>{
     //   console.log("Nested:",index,res)
