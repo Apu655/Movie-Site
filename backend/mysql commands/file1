@@ -13,3 +13,12 @@ CREATE TABLE movies (
 INSERT INTO movies (name, language, genre, rating, poster) 
 VALUES ('Pathaan', 'Hindi', 'Action', 6.1, 'I:\\University Files\\9th Semester\\CSE471\\Movie-Site\\backend\\mysql commands\\Posters\\Pathaan.jpg');
 
+INSERT INTO movies (name, language, genre, rating, poster) 
+VALUES ('Inception', 'English', 'Sci-Fi', 8.8, 'I:\\University Files\\9th Semester\\CSE471\\Movie-Site\\backend\\mysql commands\\Posters\\Inception.jpg');
+
+INSERT INTO movies (name, language, genre, rating, poster) 
+VALUES ('Morbius', 'English', 'Action', 5.2, 'I:\\University Files\\9th Semester\\CSE471\\Movie-Site\\backend\\mysql commands\\Posters\\Morbius.jpg');
+
+INSERT INTO movies (name, language, genre, rating, poster) 
+VALUES ('Kesari', 'Hindi', 'War', 7.4, 'I:\\University Files\\9th Semester\\CSE471\\Movie-Site\\backend\\mysql commands\\Posters\\Kesari.jpg');
+
