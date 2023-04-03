@@ -24,9 +24,14 @@ const Header = () => {
         </a>
         <HeaderItem title="SEARCH" Icon={SearchIcon}></HeaderItem>
 
-        <a href="/dashboard">
+        {/* <a href="/dashboard">
           <HeaderItem title={"Apu Islam"} Icon={UserIcon}></HeaderItem>
-        </a>
+        </a> */}
+        <div className="flex">
+          <UserIcon className="h-8 mb-1 cursor-pointer"/>
+
+        </div>
+
       </div>
       <div className="hover:scale-110  transform origin-x transition duration-300 ease-out">
         <Link href="/">
