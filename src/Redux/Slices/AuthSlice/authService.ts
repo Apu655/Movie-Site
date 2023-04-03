@@ -1,12 +1,12 @@
 import { axios } from "@/config";
 
 const login = async (userData: { email: string; password: string }) => {
-  const response = await axios.post("/user/login", userData);
-
-  if (response && response.data) {
-    localStorage.setItem("user", JSON.stringify(response.data.token));
+  const {data} = await axios.post("/user/login", userData);
+  console.log(data)
+  if (data) {
+    localStorage.setItem("user", JSON.stringify(data.token));
   }
-  return response.data.token;
+  return data.token;
 };
 
 const register = async (userData: any) => {

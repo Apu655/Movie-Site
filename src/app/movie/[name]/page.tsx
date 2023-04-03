@@ -7,7 +7,7 @@ import axios from "axios";
 const Details = ({ params }: any) => {
   const [results, setResults] = useState();
   const [trailer, setTrailer] = useState();
-  const [comments, setComments] = useState<any>([{ comment: "Good Coment" }]);
+  const [comments, setComments] = useState<any>([]);
 
   const movie_id = params.name;
   const getData = async () => {
@@ -37,12 +37,32 @@ const Details = ({ params }: any) => {
     getComments();
   }, []);
 
-  const [formData, setFormData] = useState("");
-  const handleChange = (e: SyntheticEvent) => {};
 
-  const handleSubmit = (e: SyntheticEvent) => {
+  const [formData, setFormData] = useState("");
+  useEffect(()=>{
+    setFormData(
+      {
+      movie_id:movie_id,
+      likes:0,
+      author:"Apu Islam",
+      comment:""
+    }
+    )
+  },[])
+
+  const handleChange = (e)=>{
+    const {value,name} = e.target
+    setFormData((prev:any)=>{
+      return {...prev,[name]:value}
+    })
+    console.log(formData)
+
+  }
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+    const {data} = await axios.post(`http://localhost:5000/comment/post`,formData)
     console.log("");
+    getComments()
   };
 
   return (
@@ -55,10 +75,9 @@ const Details = ({ params }: any) => {
               <input
                 className="w-full rounded py-1 px-2 text-black"
                 placeholder="Write a comment ..."
-                onChange={(e: any) => {
-                  setFormData(e.target.value);
-                }}
-                value={formData}
+                onChange={handleChange}
+                value={formData.comment}
+                name="comment"
               />
               <button
                 type="submit"
@@ -67,17 +86,21 @@ const Details = ({ params }: any) => {
                 Submit
               </button>
             </form>
-            <div className="flex flex-col mt-4 space-y-4 bg-white">
+            <div className="flex flex-col mt-4 space-y-4  text-white">
               {comments.length >= 0 &&
                 comments.map((data: any) => (
-                  <div className="text-black  flex">
-                    <p className="font-bold text-center">Author name</p>
-                    <p className=" border rounded-full bg-gray-300 py-3 px-4 w-full font-semibold">
-                      {data.comment}
+                  <div className="text-black flex space-x-4">
+                    <p className="font-bold bg-gray-100 text-center items-center flex text-sm rounded-full">
+                      Picture
                     </p>
+                    <div className="flex flex-col py-3 px-4 space-y-2 rounded-md bg-gray-100">
+                      <p className="text-xs font-bold">Apu Islam</p>
+                      <p className="font-semibold">
+                        {data.comment}
+                      </p>
+                    </div>
                   </div>
                 ))}
-              <p>comments testing</p>
             </div>
           </div>
         </div>
