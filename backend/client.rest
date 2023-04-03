@@ -1,0 +1,12 @@
+POST http://localhost:5000/user
+content-type: application/json
+
+{
+    "name": "Apu Islam",
+    "email": "apu@gmail23.com",
+    "password":"123456",
+    "isVerified":false
+}
+
+
+# https://jsonplaceholder.typicode.com/users
