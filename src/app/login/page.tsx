@@ -1,28 +1,39 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import { axios } from "@/config";
-import { useAppDispatch } from "@/Redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { login } from "@/Redux/Slices/AuthSlice";
+import { useRouter } from "next/navigation";
 type Props = {};
 
 const Login = (props: Props) => {
-    const dispatch = useAppDispatch()
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const auth = useAppSelector((state) => state.auth);
+  console.log(auth);
   const [formData, setFormData] = useState({
-    email:"",
-    password:""
+    email: "",
+    password: "",
   });
   const handleChange = (e: any) => {
     const { value, name } = e.target;
-    setFormData((prev:any) => {
+    setFormData((prev: any) => {
       return { ...prev, [name]: value };
     });
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    dispatch(login(formData))
+    dispatch(login(formData));
   };
+
+  useEffect(() => {
+    if (auth.user){
+        router.push("/")
+    }
+
+  },[auth.user]);
 
   return (
     <div className="flex justify-center flex-col">
