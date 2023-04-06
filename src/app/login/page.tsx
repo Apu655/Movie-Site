@@ -67,6 +67,7 @@ const Login = (props: Props) => {
               placeholder="Password"
             />
           </div>
+          {auth.message && <p className="text-red-500">{auth.message}</p>}
           <p className="text-xs my-2 cursor-pointer hover:text-gray-400">
             Forgot your password?
           </p>
