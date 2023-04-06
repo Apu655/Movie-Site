@@ -1,35 +1,40 @@
-'use client'
-import requests from '../utils/requests'
+"use client";
+import requests from "../utils/requests";
 import Results from "@/components/Results";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useAppDispatch,useAppSelector } from "@/Redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { getMovie } from "@/Redux/Slices/MovieSlice/MovieSlice";
-import Loading from '@/components/Loading';
+import Loading from "@/components/Loading";
+import { AuthGuard } from "@/guards/AuthGuard";
 
-
-export default function Home({results}:any) {
-  const dispatch = useAppDispatch()
-  useEffect(()=>{
+export default function Home({ results }: any) {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
     // getData()
-    dispatch(getMovie())
-    
-  },[])
-  const {isLoading,isSuccess,isError,movieList} = useAppSelector(state=>state.movie)
-  console.log(movieList)
+    dispatch(getMovie());
+  }, []);
+  const { isLoading, isSuccess, isError, movieList } = useAppSelector(
+    (state) => state.movie
+  );
+  console.log(movieList);
 
-  const API_KEY = '8b6df62253b4f02d186eaf35b0f43ea2'
-  if(isLoading){
-    return (
-      <Loading/>
-    )
+  const API_KEY = "8b6df62253b4f02d186eaf35b0f43ea2";
+  if (isLoading) {
+    return <Loading />;
   }
   return (
-    <main >
-      {/* {isLoading && <Loading/>} */}
-      {movieList.length>0 ?(<Results results={movieList}></Results>):(<div></div>)}      
-    </main>
-  )
+    <AuthGuard>
+      <main>
+        {/* {isLoading && <Loading/>} */}
+        {movieList.length > 0 ? (
+          <Results results={movieList}></Results>
+        ) : (
+          <div></div>
+        )}
+      </main>
+    </AuthGuard>
+  );
 }
 
 // export async function getServerSideProps(context:any){
