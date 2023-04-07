@@ -9,9 +9,16 @@
 //   isLoading: boolean;
 //   message: any;
 // }
-
+export interface Iregister {
+  name: string;
+  email: string;
+  password: string;
+  // cPassword: string;
+  // isVerified: boolean;
+  // isAdmin: boolean;
+}
 export interface IUser {
-  user: any
+  user: any;
 
   isError: boolean;
   isSuccess: boolean;

@@ -2,10 +2,13 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
-import { IUser } from "./interfaces";
+import { IUser,Iregister } from "./interfaces";
+import { useEffect } from "react";
 
 // const user = typeof window!=="undefined"? window.localStorage.getItem("user"):false;
-const user = localStorage.getItem("user")
+
+const user = JSON.parse(localStorage.getItem("user"))
+
 const initialState: IUser = {
   user: user?user:null,
   isError: false,
@@ -34,7 +37,7 @@ export const login = createAsyncThunk(
 
 export const register = createAsyncThunk(
   "auth/register",
-  async (user, { rejectWithValue }) => {
+  async (user:Iregister, { rejectWithValue }) => {
     try {
       return await authService.register(user);
     } catch (error: any) {
@@ -85,7 +88,7 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.user = null;
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;

@@ -6,6 +6,7 @@ import { axios } from "@/config";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { login } from "@/Redux/Slices/AuthSlice";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 type Props = {};
 
 const Login = (props: Props) => {
@@ -78,7 +79,9 @@ const Login = (props: Props) => {
             Login
           </button>
         </div>
+        <p>Don't have an account? <Link href='/register' className="hover:text-red-500 text-gray-400">Create one</Link></p>
       </form>
+      
     </div>
   );
 };
