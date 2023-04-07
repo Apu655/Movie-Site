@@ -16,7 +16,7 @@ import { useState } from "react";
 import { logout, reset } from "@/Redux/Slices/AuthSlice";
 import { useRouter } from "next/navigation";
 const Header = () => {
-  const auth = useAppSelector((state) => state.auth);
+  const {user} = useAppSelector((state) => state.auth);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [toggleDropDown, setToggleDropDown] = useState(false);
@@ -25,8 +25,9 @@ const Header = () => {
     dispatch(logout());
     router.push("/login");
   };
-  console.log("auth from header", auth);
-  const userTitle = auth.user ? "Apu Islam" : "";
+  console.log("auth from header", user);
+  const userTitle = user ? user.name : "";
+  console.log(userTitle)
   return (
     <header className="flex flex-col sm:flex-row justify-between m-5 items-center h-auto">
       <div className="flex flex-grow justify-evenly max-w-2xl">
@@ -43,7 +44,7 @@ const Header = () => {
         {/* <a href="/dashboard">
           <HeaderItem title={"Apu Islam"} Icon={UserIcon}></HeaderItem>
         </a> */}
-        {auth.user && (
+        {user && user.name && (
           <div className="relative select-none">
             <div
               onClick={() => {
