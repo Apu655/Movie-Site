@@ -15,6 +15,7 @@ import jwtDecode from "jwt-decode";
 import { useState } from "react";
 import { logout, reset } from "@/Redux/Slices/AuthSlice";
 import { useRouter } from "next/navigation";
+import { ADMIN_HEADER_LINKS } from "./HeaderConstants";
 const Header = () => {
   const {user} = useAppSelector((state) => state.auth);
   const router = useRouter();
@@ -58,12 +59,13 @@ const Header = () => {
             </div>
             {toggleDropDown && (
               <ul className="absolute top-12 w-36 bg-slate-800 bg-opacity-75 px-2 py-1 rounded">
-                <li className="hover:bg-slate-600 cursor-pointer px-2 rounded">
-                  Profile
+                {ADMIN_HEADER_LINKS.map((item, index)=>(
+
+                  <li key={index} className="hover:bg-slate-600 cursor-pointer px-2 rounded">
+                  <Link href={`${item.path}`}>{item.title}</Link>
                 </li>
-                <li className="hover:bg-slate-600 cursor-pointer px-2 rounded">
-                  Dashboard
-                </li>
+                ))}
+                
                 <li
                   onClick={() => handleLogout()}
                   className="hover:bg-slate-600 cursor-pointer px-2 rounded"
