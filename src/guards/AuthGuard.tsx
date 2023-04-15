@@ -16,7 +16,7 @@ export const AuthGuard = ({ children }: { children: React.ReactNode }) => {
         router.push("/login");
       }
     }
-  }, [pathname]);
+  }, [pathname,auth]);
   if (!auth) {
     return <Loading/>;
   } else {

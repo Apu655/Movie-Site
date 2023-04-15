@@ -3,11 +3,13 @@ import Head from "next/head";
 import Movies from "@/components/Movies";
 import { SyntheticEvent, useEffect, useState } from "react";
 import axios from "axios";
+import { useAppSelector } from "@/Redux/hooks";
 
 const Details = ({ params }: any) => {
   const [results, setResults] = useState();
   const [trailer, setTrailer] = useState();
   const [comments, setComments] = useState<any>([]);
+  const {user} = useAppSelector((state) => state.auth);
 
   const movie_id = params.name;
   const getData = async () => {
@@ -37,32 +39,26 @@ const Details = ({ params }: any) => {
     getComments();
   }, []);
 
-
-  const [formData, setFormData] = useState("");
-  useEffect(()=>{
-    setFormData(
-      {
-      movie_id:movie_id,
-      likes:0,
-      author:"Apu Islam",
-      comment:""
-    }
-    )
-  },[])
-
-  const handleChange = (e)=>{
-    const {value,name} = e.target
-    setFormData((prev:any)=>{
-      return {...prev,[name]:value}
-    })
-    console.log(formData)
-
-  }
+  const [formData, setFormData] = useState({
+    movie_id: movie_id,
+    likes: 0,
+    author: user?.name,
+    comment: "",
+  });
+  const handleChange = (e: any) => {
+    const { value, name } = e.target;
+    setFormData((prev: any) => {
+      return { ...prev, [name]: value };
+    });
+  };
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    const {data} = await axios.post(`http://localhost:5000/comment/post`,formData)
-    console.log("");
-    getComments()
+    const { data } = await axios.post(
+      `http://localhost:5000/comment/post`,
+      formData
+    );
+
+    getComments();
   };
 
   return (
@@ -94,10 +90,8 @@ const Details = ({ params }: any) => {
                       Picture
                     </p>
                     <div className="flex flex-col py-3 px-4 space-y-2 rounded-md bg-gray-100">
-                      <p className="text-xs font-bold">Apu Islam</p>
-                      <p className="font-semibold">
-                        {data.comment}
-                      </p>
+                      <p className="text-xs font-bold">{data.author}</p>
+                      <p className="font-semibold">{data.comment}</p>
                     </div>
                   </div>
                 ))}
