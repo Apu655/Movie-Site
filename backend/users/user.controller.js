@@ -38,7 +38,6 @@ module.exports = {
   },
   login: (req, res) => {
     const { email, password } = req.body;
-    console.log(req);
     console.log("Email :", email);
     getUserByEmail(email, (err, results) => {
       if (err) {
@@ -47,10 +46,11 @@ module.exports = {
       if (!results) {
         return res.json({
           succes: 0,
-          data: `Invalid email or password 2 ${results}`,
+          data: `Invalid email or password ${results}`,
         });
       }
-      const result = compare(results.password,password).then();
+      const result = compareSync(password,results.password);
+      console.log("The result is :",result)
       if (result) {
         results.password = undefined;
         const jsontoken = sign({ result: results }, "qwe1234", {
@@ -60,11 +60,12 @@ module.exports = {
           success: 1,
           message: "Login Successfully",
           token: jsontoken,
+          result:result,
         });
       } else {
         return res.json({
           success: 0,
-          data: `Invalid email or password 3 ${result} given password: ${password}, result password: ${results.password}`,
+          data: `Wrong Password`,
         });
       }
     });
