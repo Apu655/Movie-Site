@@ -2,7 +2,7 @@
 CREATE DATABASE movie_stream_site;
 
 #2. Create a table (users)
-CREATE TABLE users (id int AUTO_INCREMENT PRIMARY KEY, name VARCHAR(20), email VARCHAR(30) UNIQUE, password VARCHAR(20), isAdmin Boolean DEFAULT false, isVerified BOolean DEFAULT false);
+CREATE TABLE users (id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, name VARCHAR(30),email VARCHAR(30),password VARCHAR(100), isVerified BOOLEAN DEFAULT 0,isAdmin BOOLEAN DEFAULT 0);
 
 #3. Create a table (comments)
 CREATE Table comments_table (id int AUTO_INCREMENT PRIMARY KEY, comment VARCHAR(50), movie_id VARCHAR(20), likes INT DEFAULT 0, author VARCHAR(20));
