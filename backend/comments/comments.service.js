@@ -28,8 +28,18 @@ module.exports = {
             if (error){
                 return callback(error)
             }
-            return callback(null,error)
+            return callback(null,results)
         }
         )
+    },
+    updateComment:(body,callback)=>{
+        pool.query(`UPDATE comments_table SET comment= ? WHERE id = ?`,[body.comment,body.id],
+        
+        (error,results,fields)=>{
+            if (error){
+                return callback(error)
+            }
+            return callback(null,results)
+        })
     }
 }

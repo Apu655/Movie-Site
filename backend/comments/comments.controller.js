@@ -1,4 +1,4 @@
-const {create,getComments, deleteCommentById} = require("./comments.service")
+const {create,getComments, deleteCommentById, updateComment} = require("./comments.service")
 module.exports={
     createComments:(req,res)=>{
         const body = req.body
@@ -48,5 +48,22 @@ module.exports={
             })
         })
         
+    },
+    updateComment:(req,res)=>{
+        const body = req.body
+        updateComment(body,(err,resutls)=>{
+            if (err){
+                return res.json({
+                    success:0,
+                    message:"Failed to update the comment"
+                })
+
+            }
+            return res.json({
+                success:1,
+                message:"Comment is edited."
+            })
+        })
+
     }
 }
