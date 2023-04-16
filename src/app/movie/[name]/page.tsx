@@ -8,6 +8,12 @@ const Details = ({ params }: any) => {
   const [results, setResults] = useState();
   const [trailer, setTrailer] = useState();
   const [comments, setComments] = useState<any>([]);
+  const [update,setUpdate] = useState({
+    isEdit:false,
+    comment:"",
+    id:""
+
+  })
 
   const movie_id = params.name;
   const getData = async () => {
@@ -37,7 +43,11 @@ const Details = ({ params }: any) => {
     getComments();
   }, []);
 
-
+  const handleDelete = async (id:string)=>{
+    const {data} = await axios.delete(`http://localhost:5000/comment/delete/${id}`)
+    getComments()
+    
+  }
   const [formData, setFormData] = useState("");
   useEffect(()=>{
     setFormData(
@@ -90,14 +100,18 @@ const Details = ({ params }: any) => {
               {comments.length >= 0 &&
                 comments.map((data: any) => (
                   <div className="text-black flex space-x-4">
-                    <p className="font-bold bg-gray-100 text-center items-center flex text-sm rounded-full">
+                    <p className="font-bold px-3 bg-gray-100 text-center items-center flex text-sm rounded-full">
                       Picture
                     </p>
                     <div className="flex flex-col py-3 px-4 space-y-2 rounded-md bg-gray-100">
-                      <p className="text-xs font-bold">Apu Islam</p>
+                      <p className="text-xs font-bold">{data.author}</p>
                       <p className="font-semibold">
                         {data.comment}
                       </p>
+                      <div className="flex space-x-5">
+                        <p className="text-xs p-2 hover:bg-gray-300 rounded text-gray-500 cursor-pointer">Edit</p>
+                        <p onClick={()=>{handleDelete(data.id)}} className="text-xs p-2 hover:bg-red-300 rounded text-red-500 cursor-pointer">Delete</p>
+                      </div>
                     </div>
                   </div>
                 ))}
