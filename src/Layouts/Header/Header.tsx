@@ -15,7 +15,7 @@ import jwtDecode from "jwt-decode";
 import { useState } from "react";
 import { logout, reset } from "@/Redux/Slices/AuthSlice";
 import { useRouter } from "next/navigation";
-import { ADMIN_HEADER_LINKS } from "./HeaderConstants";
+import { ADMIN_HEADER_LINKS, USER_HEADER_LINKS } from "./HeaderConstants";
 const Header = () => {
   const {user} = useAppSelector((state) => state.auth);
   const router = useRouter();
@@ -26,9 +26,9 @@ const Header = () => {
     dispatch(logout());
     router.push("/login");
   };
-  console.log("auth from header", user);
   const userTitle = user ? user.name : "";
-  console.log(userTitle)
+  const Header = user?.isAdmin ? ADMIN_HEADER_LINKS:USER_HEADER_LINKS
+
   return (
     <header className="flex flex-col sm:flex-row justify-between m-5 items-center h-auto">
       <div className="flex flex-grow justify-evenly max-w-2xl">
@@ -59,10 +59,10 @@ const Header = () => {
             </div>
             {toggleDropDown && (
               <ul className="absolute top-12 w-36 bg-slate-800 bg-opacity-75 px-2 py-1 rounded">
-                {ADMIN_HEADER_LINKS.map((item, index)=>(
+                {Header.map((item, index)=>(
 
-                  <li key={index} className="hover:bg-slate-600 cursor-pointer px-2 rounded">
-                  <Link href={`${item.path}`}>{item.title}</Link>
+                  <li key={index} className="hover:bg-slate-600 cursor-pointer rounded">
+                  <Link className="px-2" href={`${item.path}`}>{item.title}</Link>
                 </li>
                 ))}
                 

@@ -8,3 +8,10 @@ export const ADMIN_HEADER_LINKS = [
     path: "/admin",
   },
 ];
+
+export const USER_HEADER_LINKS = [
+  {
+    title:"Profile",
+    path:"/profile"
+  },
+];
