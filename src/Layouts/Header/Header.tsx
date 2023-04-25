@@ -10,8 +10,6 @@ import {
   UserIcon,
 } from "@heroicons/react/outline";
 import Link from "next/link";
-import { useContext } from "react";
-import jwtDecode from "jwt-decode";
 import { useState } from "react";
 import { logout, reset } from "@/Redux/Slices/AuthSlice";
 import { useRouter } from "next/navigation";

@@ -1,7 +1,12 @@
+import { useDispatch } from "react-redux";
 import requests from "../../utils/requests";
 import { useRouter } from "next/navigation";
+import { getMovie } from "@/Redux/Slices/MovieSlice/MovieSlice";
+import { AppDispatch } from "@/Redux/store";
 const Navbar = () => {
   const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>()
+  const baseURL = "https://api.themoviedb.org/3"
 
   return (
     <nav className="relative">
@@ -12,6 +17,8 @@ const Navbar = () => {
             className="hover:scale-125 hover:text-white active:text-red-500 cursor-pointer transition duration-100 transform"
             onClick={() => {
               router.push(`/?genre=${key}`);
+              dispatch(getMovie(baseURL+url))
+
             }}
           >
             {title}

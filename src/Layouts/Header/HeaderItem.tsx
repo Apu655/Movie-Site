@@ -1,6 +1,9 @@
-import { getMovie, getMovieBySearch } from "@/Redux/Slices/MovieSlice/MovieSlice";
+import {
+  getMovie,
+  getMovieBySearch,
+} from "@/Redux/Slices/MovieSlice/MovieSlice";
 import { useAppDispatch } from "@/Redux/hooks";
-import { useState, useContext } from "react";
+import { useState } from "react";
 
 interface HeaderProps {
   Icon: any;
@@ -9,20 +12,19 @@ interface HeaderProps {
 
 const HeaderItem = ({ Icon, title }: HeaderProps) => {
   const [openSearch, setOpenSearch] = useState(false);
-  const dispatch = useAppDispatch()
-
+  const dispatch = useAppDispatch();
+  const API_KEY = "8b6df62253b4f02d186eaf35b0f43ea2";
+  const API_URL_GET = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`;
   const handleSearch = () => {
     setOpenSearch(!openSearch);
   };
-  const handleChange = (e:any) => {
-    const {value} = e.target
-    if (value){
-      dispatch(getMovieBySearch(e.target.value))
+  const handleChange = (e: any) => {
+    const { value } = e.target;
+    if (value) {
+      dispatch(getMovieBySearch(e.target.value));
+    } else {
+      dispatch(getMovie(API_URL_GET));
     }
-    else{
-      dispatch(getMovie())
-    }
-    
   };
 
   if (title == "SEARCH") {

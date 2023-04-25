@@ -10,16 +10,17 @@ import { AuthGuard } from "@/guards/AuthGuard";
 
 export default function Home({ results }: any) {
   const dispatch = useAppDispatch();
+  const API_KEY = "8b6df62253b4f02d186eaf35b0f43ea2";
+  const API_URL_GET = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`;
   useEffect(() => {
     // getData()
-    dispatch(getMovie());
+    dispatch(getMovie(API_URL_GET));
   }, []);
   const { isLoading, isSuccess, isError, movieList } = useAppSelector(
     (state) => state.movie
   );
   console.log(movieList);
 
-  const API_KEY = "8b6df62253b4f02d186eaf35b0f43ea2";
   if (isLoading) {
     return <Loading />;
   }

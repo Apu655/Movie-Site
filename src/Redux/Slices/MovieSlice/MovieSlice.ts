@@ -5,16 +5,16 @@ const initialState: Imovie = {
   isLoading: false,
   isSuccess: false,
   isError: false,
-  message: '',
+  message: "",
   movieList: [],
 };
 
 export const getMovie = createAsyncThunk(
   "movie/getAll",
-  async (_, {rejectWithValue}) => {
+  async (api:any, { rejectWithValue }) => {
     try {
       // const token = thunkAPI.getState().auth.user.token
-      return await movieService.getMovie();
+      return await movieService.getMovie(api);
     } catch (error: any) {
       const message =
         (error.response &&
@@ -26,15 +26,17 @@ export const getMovie = createAsyncThunk(
     }
   }
 );
-export const getMovieBySearch = createAsyncThunk("movie/getBySearch",async(query:string,{rejectWithValue})=>{
-  try{
-    return await movieService.getMovieBySearch(query);
+export const getMovieBySearch = createAsyncThunk(
+  "movie/getBySearch",
+  async (query: string, { rejectWithValue }) => {
+    try {
+      return await movieService.getMovieBySearch(query);
+    } catch (error: any) {
+      const message = "failed to search!";
+      return rejectWithValue(message);
+    }
   }
-  catch(error:any){
-    const message = "failed to search!"
-    return rejectWithValue(message)
-  }
-})
+);
 
 export const movieSlice = createSlice({
   name: "movie",
@@ -57,20 +59,20 @@ export const movieSlice = createSlice({
         state.isSuccess = true;
         state.movieList = action.payload;
       })
-      .addCase(getMovieBySearch.pending,(state)=>{
-        state.isLoading = true
+      .addCase(getMovieBySearch.pending, (state) => {
+        state.isLoading = true;
       })
-      .addCase(getMovieBySearch.rejected,(state,action)=>{
+      .addCase(getMovieBySearch.rejected, (state, action) => {
         state.isLoading = false;
-        
-        state.message = action.payload
-        state.isError = true
+
+        state.message = action.payload;
+        state.isError = true;
       })
-      .addCase(getMovieBySearch.fulfilled,(state,action)=>{
+      .addCase(getMovieBySearch.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.movieList = action.payload
-      })
+        state.movieList = action.payload;
+      });
   },
 });
 
