@@ -75,6 +75,7 @@ const Details = ({ params }: any) => {
     e.preventDefault();
     const {data} = await axios.post(`http://localhost:5000/comment/post`,formData)
     console.log("");
+    setFormData((prev)=>{return {...prev,['comment']:""}})
     getComments()
   };
 
