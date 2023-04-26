@@ -44,7 +44,7 @@ const Details = ({ params }: any) => {
       <div>
         {trailer && <Movies result={results} trailer={trailer}></Movies>}
         <div className="lg:max-w-6xl mx-auto">
-          <CommentBox movie_id={movie_id} />
+          <CommentBox movie_id={movie_id} auth={auth} />
         </div>
       </div>
     </>
