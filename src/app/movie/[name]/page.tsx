@@ -3,8 +3,10 @@ import Head from "next/head";
 import Movies from "@/components/Movies";
 import { SyntheticEvent, useEffect, useState } from "react";
 import axios from "axios";
+import { useAppSelector } from "@/Redux/hooks";
 
 const Details = ({ params }: any) => {
+  const auth = useAppSelector(state=>state.auth)
   const [results, setResults] = useState();
   const [trailer, setTrailer] = useState();
   const [comments, setComments] = useState<any>([]);
@@ -54,18 +56,19 @@ const Details = ({ params }: any) => {
       {
       movie_id:movie_id,
       likes:0,
-      author:"Apu Islam",
+      author:auth.user.name,
       comment:""
     }
     )
   },[])
 
-  const handleChange = (e)=>{
+  const handleChange = (e:any)=>{
     const {value,name} = e.target
+    console.log(formData)
     setFormData((prev:any)=>{
       return {...prev,[name]:value}
     })
-    console.log(formData)
+    
 
   }
   const handleSubmit = async (e: SyntheticEvent) => {
