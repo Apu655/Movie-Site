@@ -8,8 +8,19 @@ import { useEffect, useState } from "react";
 type Props = {};
 
 const page = (props: Props) => {
-  const labels = ['January','February','March', 'April','May','June','July','August','September','October']
-  const labels2 = ['2019','2020','2021', '2022','2023']
+  const labels = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+  ];
+  const labels2 = ["2019", "2020", "2021", "2022", "2023"];
   const [users, setUsers] = useState([]);
   const getData = async () => {
     const { data } = await axios.get(`user/get`);
@@ -17,18 +28,25 @@ const page = (props: Props) => {
     console.log(data);
   };
 
+  const deleteUser = (id: any) => {
+    axios.delete(`user/delete/`, {data:{id:id}});
+    // console.log("Detele", data);
+    alert("User Deleted!")
+    getData()
+  };
+
   useEffect(() => {
     getData();
   }, []);
   return (
     <div className="max-w-7xl mx-auto grid grid-cols-2">
-      <div className='col-span-1'>
-      <p className="font-semibold text-lg">Profits throught the years:</p>
-                    <LineChart labels={labels}/>
+      <div className="col-span-1">
+        <p className="font-semibold text-lg">Profits throught the years:</p>
+        <LineChart labels={labels} />
       </div>
-      <div className='col-span-1 '>
-      <p className="font-semibold text-lg">Profits throught the years:</p>
-                    <BarChart labels={labels2}/>
+      <div className="col-span-1 ">
+        <p className="font-semibold text-lg">Profits throught the years:</p>
+        <BarChart labels={labels2} />
       </div>
       <div className="max-h-96 overflow-auto col-span-2 scrollbar-hide">
         <h2 className="text-lg font-semibold my-2">List of Users :</h2>
@@ -39,7 +57,7 @@ const page = (props: Props) => {
             <Table.HeadCell>Email</Table.HeadCell>
             <Table.HeadCell>isAdmin</Table.HeadCell>
             <Table.HeadCell>
-              <span className="sr-only">Edit</span>
+              <span className="sr-only">Delete</span>
             </Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
@@ -55,12 +73,12 @@ const page = (props: Props) => {
                     {user.isAdmin ? "Admin" : "Not-Admin"}
                   </Table.Cell>
                   <Table.Cell>
-                    <a
-                      href="/tables"
+                    <button
+                      onClick={() => deleteUser(user.id)}
                       className="font-medium text-blue-600 hover:underline dark:text-blue-500"
                     >
-                      Edit
-                    </a>
+                      Delete
+                    </button>
                   </Table.Cell>
                 </Table.Row>
               ))}

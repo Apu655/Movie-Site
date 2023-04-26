@@ -11,13 +11,12 @@ require('dotenv').config();
 // });
 
 const pool = createPool({
-    host:"localhost",
-    user:"root",
-    password:"",
-    database:"movie_stream_site",
-    connectionsLimit:10,
-    
-})
+    host: "localhost",
+    user: "root",
+    password: "password",
+    database: "movie_stream_site",
+    connectionsLimit: 10,
+  });
 
 
 // pool.query(`select * from users where`,(err,result,fields)=>{
