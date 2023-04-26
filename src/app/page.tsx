@@ -37,20 +37,3 @@ export default function Home({ results }: any) {
     </AuthGuard>
   );
 }
-
-// export async function getServerSideProps(context:any){
-//   const genre:string = context.query.genre;
-//   const request = await fetch(
-//     `https://api.themoviedb.org/3${
-//       requests[genre]?.url || requests.fetchTrending.url
-//     }`
-//     )
-//     const data = await request.json()
-//     console.log(data)
-
-//   return{
-//     props:{
-//       results:data.results,
-//     }
-//   }
-// }
