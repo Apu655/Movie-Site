@@ -1,4 +1,5 @@
 const {createUser,getUsers,login,deleteUser} = require("./user.controller")
+const auth = require("../middleware/auth")
 const router = require("express").Router()
 
 router.post("/register",createUser)

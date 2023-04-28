@@ -6,10 +6,9 @@ type Props = {};
 
 const CommentBox = ({ movie_id, auth }) => {
   const [comments, setComments] = useState<any>([]);
-  const [edit,setEdit] = useState(false)
+  const [edit, setEdit] = useState(false);
 
-  
-//   const auth = useAppSelector((state) => state.auth);
+  //   const auth = useAppSelector((state) => state.auth);
   const getComments = async () => {
     const { data } = await axios.get(
       `http://localhost:5000/comment/get?movie_id=${movie_id}`
@@ -81,9 +80,16 @@ const CommentBox = ({ movie_id, auth }) => {
               </p>
               <div className="flex flex-col py-3 px-4 space-y-2 rounded-md bg-gray-100">
                 <p className="text-xs font-bold">{data.author}</p>
-                {!edit?(<p className="font-semibold">{data.comment}</p>):(<input type='text'/>)}
+                {!edit ? (
+                  <p className="font-semibold">{data.comment}</p>
+                ) : (
+                  <input type="text" />
+                )}
                 <div className="flex space-x-5">
-                  <p onClick={()=>setEdit(!edit)} className="text-xs p-2 hover:bg-gray-300 rounded text-gray-500 cursor-pointer">
+                  <p
+                    onClick={() => setEdit(!edit)}
+                    className="text-xs p-2 hover:bg-gray-300 rounded text-gray-500 cursor-pointer"
+                  >
                     Edit
                   </p>
                   <p
